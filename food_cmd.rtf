@@ -1,0 +1,62 @@
+# Command
+###############################################################
+###############################################################
+
+solve;
+option omit_zero_rows 1;
+display BX, LX, DX;
+
+display BY,LY,DY;
+
+display nutrSlack;
+
+
+
+
+# Display the individual calculations for the objective function (COST / BINARY / SLACK)
+# Display Cost from objective function
+
+display sum{b in breakfastFoods,t in days} bcost[b]*BX[b,t]
+	+ sum{l in lunchFoods,t in days} lcost[l]*LX[l,t]
+	+ sum{d in dinnerFoods,t in days} dcost[d]*DX[d,t]
+;
+
+# display binary part from objective function
+
+display 0.01*sum{r in restaurants , t in days} (BY[r,t]+LY[r,t]+DY[r,t])
+;
+
+
+# Display slack from objective function
+
+display sum{n in nutrients,t in days} nutrSlackVar[n,t]
+;
+
+
+
+
+# Display the cost by day {t in days} :
+display  {t in days}:
+		  sum{b in breakfastFoods} bcost[b]*BX[b,t]
+		+ sum{l in lunchFoods} lcost[l]*LX[l,t]
+		+ sum{d in dinnerFoods} dcost[d]*DX[d,t]
+
+;
+
+# Display weekly cost 
+display  :
+		  sum{b in breakfastFoods,t in days} bcost[b]*BX[b,t]
+		+ sum{l in lunchFoods,t in days} lcost[l]*LX[l,t]
+		+ sum{d in dinnerFoods,t in days} dcost[d]*DX[d,t]
+
+;
+
+
+
+# display daily calories
+
+display {t in days }  : 
+		  	  sum{b in breakfastFoods} 	(bnutr[b,'Calories']*BX[b,t])
+			+ sum{l in lunchFoods} 		(lnutr[l,'Calories']*LX[l,t])
+			+ sum{d in dinnerFoods} 	(dnutr[d,'Calories']*DX[d,t])
+;

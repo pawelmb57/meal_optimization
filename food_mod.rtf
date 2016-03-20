@@ -1,0 +1,126 @@
+# Model
+# ##############################################################
+# ##############################################################
+
+# param nBreakfastFoods;
+# param nNotBreakfastFoods;
+
+set breakfastFoods;
+set lunchFoods;
+set dinnerFoods;
+
+set restaurants;
+
+set nutrients;
+
+set days;
+
+param bcost{breakfastFoods} >= 0;
+param lcost{lunchFoods} >= 0;
+param dcost{dinnerFoods} >= 0;
+
+param bnutr{breakfastFoods , nutrients} >= 0;
+param lnutr{lunchFoods , nutrients} >= 0;
+param dnutr{dinnerFoods , nutrients} >= 0;
+param nutrGoal{nutrients,days} >= 0;
+param hardNutrMin{nutrients,days} >= 0;
+param hardNutrMax{nutrients,days} >= 0;
+
+param vB{breakfastFoods,restaurants};
+param vL{lunchFoods,restaurants};
+param vD{dinnerFoods,restaurants};
+
+
+# Decision Variables
+# ##############################################################
+var BX{breakfastFoods,days} binary	>= 0;
+var LX{lunchFoods,days}   binary	>= 0;
+var DX{dinnerFoods,days}  binary	>= 0;
+
+var nutrSlack{nutrients,days};
+var nutrSlackVar{nutrients,days};
+
+var BY{restaurants , days}  binary >= 0;
+var LY{restaurants , days}  binary >= 0;
+var DY{restaurants , days}  binary >= 0;
+
+
+# Objective Function
+# ##############################################################
+
+minimize fun :
+
+	sum{r in restaurants , t in days} (BY[r,t]+LY[r,t]+DY[r,t])
+	+ sum{n in nutrients,t in days} nutrSlackVar[n,t]
+;
+
+
+# Constraints
+# ##############################################################
+
+
+# Binary Linking Constraints
+	subject to linkBY {b in breakfastFoods , t in days , r in restaurants}:	vB[b,r]*BX[b,t] - 100000000*BY[r,t] <= 0;
+	subject to linkLY {l in lunchFoods     , t in days , r in restaurants}: vL[l,r]*LX[l,t] - 100000000*LY[r,t] <= 0;
+	subject to linkDY {d in dinnerFoods    , t in days , r in restaurants}: vD[d,r]*DX[d,t] - 100000000*DY[r,t] <= 0;
+
+
+
+# At least one item per meal
+	subject to eatBreakfast {t in days}	:	sum{b in breakfastFoods} BX[b,t] >= 1;
+	subject to eatLunch {t in days}		:	sum{l in lunchFoods} LX[l,t] >= 1;
+	subject to eatDinner {t in days}	:	sum{d in dinnerFoods} DX[d,t] >= 1;
+
+
+
+# Nutritional Slack Absolute Value
+
+	subject to slackabscon1 {n in nutrients , t in days}:   
+		nutrSlackVar[n,t] >= nutrSlack[n,t] 
+;
+
+	subject to slackabscon2 {n in nutrients , t in days}:   
+		nutrSlackVar[n,t] >= -nutrSlack[n,t] 
+; 
+
+
+
+# Nutritional Goals
+	subject to getCloseToNutrGoals {t in days , n in nutrients} : 
+		  	  sum{b in breakfastFoods} 	(bnutr[b,n]*BX[b,t])
+			+ sum{l in lunchFoods} 		(lnutr[l,n]*LX[l,t])
+			+ sum{d in dinnerFoods} 	(dnutr[d,n]*DX[d,t])
+			+ nutrSlackVar[n,t]  = nutrGoal[n,t]
+
+;
+
+
+# Cannot go to the same restaurant more than once in a day
+	subject to restaurantVariety {r in restaurants,t in days}:
+		(BY[r,t] + LY[r,t] + DY[r,t]) <= 1
+;
+
+# Can only go to one restaurant per meal
+
+	subject to oneRestarauntForBreakfast {t in days} : sum{ r in restaurants} BY[r,t] <= 1;
+	subject to oneRestarauntForLunch {t in days} : sum{ r in restaurants} LY[r,t] <= 1;
+	subject to oneRestarauntForDinner {t in days} : sum{ r in restaurants} DY[r,t] <= 1;
+
+
+# Weekly Budget
+
+	subject to budgetConstraint : 
+		  sum{b in breakfastFoods,t in days} bcost[b]*BX[b,t]
+		+ sum{l in lunchFoods,t in days} lcost[l]*LX[l,t]
+		+ sum{d in dinnerFoods,t in days} dcost[d]*DX[d,t] <= 125 ;
+
+
+# Cannot have the same item more than once during the plan 
+
+	subject to c13 {b in breakfastFoods} : sum{t in days}(BX[b,t]) <= 1;
+	subject to c14 {l in lunchFoods} : sum{t in days}(LX[l,t]) <= 1;
+	subject to c15 {d in dinnerFoods} : sum{t in days}(DX[d,t]) <= 1;
+
+
+
+
