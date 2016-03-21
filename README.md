@@ -1,5 +1,7 @@
 # Meal Optimization Linear Program
 
+To determine a menu consisting of fast food items, our group created a mixed integer linear program that optimized for both price and the quality of food. We collected data from fast food restaurants, which included pricing and nutritional information. After developing an AMPL model, our group used the Gurobi solver, which implemented the brand and bound method.
+
 #### Contents
   * [Command File](https://github.com/pawelmb57/meal_optimization/blob/master/food_cmd.rtf)
   * [Model File (Optimizing Quality)](https://github.com/pawelmb57/meal_optimization/blob/master/food_mod.rtf)
