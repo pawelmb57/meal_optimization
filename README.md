@@ -15,10 +15,12 @@ To determine a menu consisting of fast food items, our group created a mixed int
 
 ### 9 Restaurants
   
+![Fastfood Restaurants.](http://goo.gl/0DMOH8)
+  
 ### Optimizing Nutrients
 
 ![Nutritional Variables.](http://goo.gl/CFDMhc)
 
 ### Final Meal Plan
 
-![Final Results](http://goo.gl/khUWdb)
+![Final Results.](http://goo.gl/khUWdb)
