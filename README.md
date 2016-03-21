@@ -14,7 +14,8 @@ To determine a menu consisting of fast food items, our group created a mixed int
 ## Data
 
 ### 9 Restaurants
-  
+
+![Caption for the picture.](http://goo.gl/6lG43O)
 ![Fastfood Restaurants.](http://goo.gl/0DMOH8)
   
 ### Optimizing Nutrients
