@@ -13,7 +13,7 @@
 
 ### 9 Restaurants
   
-![Fastfood Restaurants](http://goo.gl/0DMOH8)
+![Fastfood Restaurants.](http://goo.gl/0DMOH8)
 
 ### Optimizing Nutrients
 
