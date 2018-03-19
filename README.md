@@ -10,6 +10,17 @@ To determine a menu consisting of fast food items, our group created a mixed int
   + Allison Volk
   + Shiyao Yuan
 
+
+#### Link to Report Presentation
+  * [Presentation](https://github.com/pawelmb57/meal_optimization/blob/master/Meal%20Optimization%20PPT.pdf
+)
+
+#### Link to Full Report
+  * [Full Report](https://github.com/pawelmb57/meal_optimization/blob/master/Meal%20Optimization%20Report.pdf)
+
+
+
+
 #### Contents
   * [Command File](https://github.com/pawelmb57/meal_optimization/blob/master/food_cmd.rtf)
   * [Model File (Optimizing Quality)](https://github.com/pawelmb57/meal_optimization/blob/master/food_mod.rtf)
@@ -19,12 +30,3 @@ To determine a menu consisting of fast food items, our group created a mixed int
   * [Results Optimizing for Variety](https://github.com/pawelmb57/meal_optimization/blob/master/slack_variety_results.pdf)
 
 
-#### Link to Report Presentation
-  * [Presentation](https://github.com/pawelmb57/meal_optimization/blob/master/Meal%20Optimization%20PPT.pdf
-)
-
-
-
-
-#### Link to Full Report
-  * [Full Report](https://github.com/pawelmb57/meal_optimization/blob/master/Meal%20Optimization%20Report.pdf)
