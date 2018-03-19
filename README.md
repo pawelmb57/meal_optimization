@@ -18,17 +18,3 @@ To determine a menu consisting of fast food items, our group created a mixed int
   * [Results Optimizing for Nutritional Quality](https://github.com/pawelmb57/meal_optimization/blob/master/slack_budget_results.pdf)
   * [Results Optimizing for Variety](https://github.com/pawelmb57/meal_optimization/blob/master/slack_variety_results.pdf)
 
-
-## Data
-
-### 9 Restaurants
-
-![Fastfood Restaurants.](http://goo.gl/6ri5ML)
-  
-### Optimizing Nutrients
-
-![Nutritional Variables.](http://goo.gl/bXbH7y)
-
-### Final Meal Plan
-
-![Final Results.](http://goo.gl/Bf5y2m)
